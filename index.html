@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DOLONG SHOP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      :root {
+        --bg: #050505;
+        --surface: rgba(20, 20, 20, 0.65);
+        --surface-solid: #121212;
+        --surface-hover: rgba(40, 40, 40, 0.85);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(255, 255, 255, 0.25);
+        --text-main: #ffffff;
+        --text-muted: #888888;
+        --text-dark: #000000;
+        --font: 'Plus Jakarta Sans', sans-serif;
+        --radius: 16px;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text-main);
+        font-family: var(--font);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 24px 16px;
+        -webkit-font-smoothing: antialiased;
+        background-image:
+        radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+        background-attachment: fixed;
+      }
+
+      .app { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 20px; }
+
+      /* HEADER */
+      .header { text-align: center; padding: 16px 0 8px; }
+      .header h1 {
+        font-size: 34px; font-weight: 800; letter-spacing: 6px;
+        text-transform: uppercase; color: var(--text-main);
+        text-shadow: 0 0 20px rgba(255,255,255,0.15);
+      }
+      .header p {
+        font-size: 11px; color: var(--text-muted); margin-top: 10px;
+        letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+      }
+
+      /* HERO IMAGE (Ảnh demo Tipa) */
+      .hero-image {
+        width: 100%;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      }
+      .hero-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+      .hero-image:hover img { transform: scale(1.02); }
+
+      /* SECTION TITLE */
+      .section-title {
+        font-size: 13px; font-weight: 700; color: var(--text-main);
+        text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px;
+        display: flex; align-items: center; gap: 12px;
+      }
+      .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-hover), transparent); }
+
+      /* PRICING GRID */
+      .pricing-grid { display: flex; flex-direction: column; gap: 12px; }
+
+      .price-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .price-card::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+        pointer-events: none;
+      }
+
+      .price-card:hover, .price-card:active {
+        border-color: var(--border-hover);
+        background: var(--surface-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.03);
+      }
+
+      /* Highlight Best Seller */
+      .price-card.featured {
+        border-color: rgba(255, 255, 255, 0.3);
+        background: linear-gradient(180deg, rgba(40, 40, 40, 0.8), rgba(20, 20, 20, 0.6));
+      }
+      .price-card.featured::after {
+        content: 'BEST SELLER'; position: absolute; top: 14px; right: -32px;
+        background: var(--text-main); color: var(--text-dark);
+        font-size: 9px; font-weight: 800; letter-spacing: 1px;
+        padding: 4px 32px; transform: rotate(45deg);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      }
+
+      .price-info h3 { font-size: 17px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+      .price-info p { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+      .price-amount {
+        font-size: 24px; font-weight: 800; color: var(--text-main);
+        display: flex; align-items: baseline; gap: 2px;
+      }
+      .price-amount span { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+
+      /* NOTE BOX */
+      .note-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        display: flex; align-items: center; gap: 16px;
+      }
+      .note-icon {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+        display: flex; justify-content: center; align-items: center;
+        color: var(--text-main); font-size: 18px; flex-shrink: 0;
+      }
+      .note-content p { font-size: 13px; color: var(--text-muted); line-height: 1.5; font-weight: 500; }
+      .note-content strong { color: var(--text-main); font-weight: 700; }
+
+      /* FOOTER */
+      .footer { text-align: center; padding: 20px 0 10px; }
+      .footer p { font-size: 11px; color: #444; font-weight: 600; letter-spacing: 1px; }
+
+      /* MODAL */
+      .modal-overlay {
+        position: fixed; inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        display: flex; justify-content: center; align-items: center;
+        padding: 20px; z-index: 9999;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+      .modal-box {
+        background: var(--surface-solid);
+        border: 1px solid var(--border-hover);
+        border-radius: 24px;
+        padding: 28px 24px;
+        width: 100%; max-width: 340px;
+        text-align: center;
+        transform: translateY(20px) scale(0.95);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.05);
+      }
+      .modal-overlay.show .modal-box { transform: translateY(0) scale(1); }
+
+      .modal-icon {
+        width: 56px; height: 56px;
+        background: linear-gradient(135deg, #ffffff, #aaaaaa); color: var(--text-dark);
+        border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        font-size: 24px; margin: 0 auto 20px;
+        box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+      }
+      .modal-box h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
+      .modal-box p { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; font-weight: 500; }
+
+      .contact-btn {
+        display: flex; align-items: center; justify-content: center; gap: 12px;
+        width: 100%; padding: 16px;
+        border-radius: 14px; font-size: 14px; font-weight: 700;
+        text-decoration: none; margin-bottom: 12px;
+        transition: all 0.2s;
+      }
+      .btn-tg { background: var(--text-main); color: var(--text-dark); }
+      .btn-tg:hover { background: #cccccc; transform: scale(0.98); }
+
+      .btn-tiktok { background: transparent; color: var(--text-main); border: 1px solid var(--border-hover); }
+      .btn-tiktok:hover { background: rgba(255,255,255,0.05); transform: scale(0.98); }
+
+      .btn-close {
+        background: transparent; border: none;
+        color: var(--text-muted); font-size: 13px; font-weight: 600;
+        margin-top: 8px; cursor: pointer; padding: 8px;
+      }
+      .btn-close:hover { color: var(--text-main); }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="app">
+
+      <header class="header">
+        <h1>DOLONG SHOP</h1>
+        <p>uy tín làm nên thương hiệu</p>
+      </header>
+
+      <div class="hero-image">
+        <img src="https://cdn.phototourl.com/member/2026-11-17-e488fd6c-45bc-4781-bef6-f6bc307aa930.jpg"
+        alt="Tipa Sobi Demo"
+        onerror="this.src='https://placehold.co/600x300/111/fff?text=Tipa+Sobi'">
+      </div>
+
+      <div>
+        <div class="section-title">Bảng Giá Key</div>
+        <div class="pricing-grid">
+          <div class="price-card" onclick="openModal()">
+            <div class="price-info">
+              <h3>Gói 1 Ngày</h3>
+            </div>
+            <div class="price-amount">25<span>k</span></div>
+          </div>
+
+          <div class="price-card featured" onclick="openModal()">
+            <div class="price-info">
+              <h3>Gói 1 Tuần</h3>
+            </div>
+            <div class="price-amount">70<span>k</span></div>
+          </div>
+
+          <div class="price-card" onclick="openModal()">
+            <div class="price-info">
+              <h3>Gói 1 Tháng</h3>
+            </div>
+            <div class="price-amount">150<span>k</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <div class="note-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="note-content">
+          <p><strong>Ghi chú:</strong> 1 Key có thể sử dụng  cho <strong>5 game</strong> khác nhau.</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2026 DOLONG SHOP. ALL RIGHTS RESERVED.</p>
+      </div>
+
+    </div>
+
+    <div class="modal-overlay" id="contactModal" onclick="closeModal(event)">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-icon">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <h2>Liên Hệ Mua Key</h2>
+        <p>Vui lòng liên hệ Admin qua các kênh bên dưới để được cấp Key và hỗ trợ cài đặt.</p>
+
+        <a href="https://t.me/dolong07" target="_blank" class="contact-btn btn-tg">
+          <i class="fa-brands fa-telegram" style="font-size: 18px;"></i> Telegram: @dolong07
+        </a>
+
+        <a href="https://www.tiktok.com/@dolongdz_07" target="_blank" class="contact-btn btn-tiktok">
+          <i class="fa-brands fa-tiktok" style="font-size: 18px;"></i> TikTok: @dolongdz_07
+        </a>
+
+        <button class="btn-close" onclick="closeModal()">Đóng</button>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById('contactModal').classList.add('show');
+      }
+
+      function closeModal(e) {
+        if (e && e.target !== e.currentTarget && e.target.className !== 'btn-close') return;
+        document.getElementById('contactModal').classList.remove('show');
+      }
+
+    </script>
+
+  </body>
+</html>
